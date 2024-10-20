@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f2f2f2;
+            overflow: hidden;
+            flex-direction: column;
+        }
+        .heart {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            transform: rotate(-45deg);
+            animation: beat 1s infinite;
+            cursor: pointer;
+        }
+        .heart::before, .heart::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            border-radius: 50%;
+        }
+        .heart::before {
+            top: -50px;
+            left: 0;
+        }
+        .heart::after {
+            top: 0;
+            left: 50px;
+        }
+        @keyframes beat {
+            0%, 100% {
+                transform: scale(1) rotate(-45deg);
+            }
+            50% {
+                transform: scale(1.1) rotate(-45deg);
+            }
+        }
+        /* Thêm dòng chữ và mũi tên chỉ vào trái tim */
+        .arrow {
+            margin-top: 20px;
+            font-size: 30px;
+            animation: bounce 1s infinite;
+        }
+        .click-text {
+            font-family: Arial, sans-serif;
+            font-size: 18px;
+            color: blue;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+        .text {
+            position: absolute;
+            top: 130px;
+            width: 100%;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            font-size: 20px;
+            color: #FF69B4;
+            font-weight: bold;
+            animation: fadeIn 2s infinite;
+        }
+        @keyframes fadeIn {
+            0%, 100% {
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+        /* Hiệu ứng ngôi sao rơi xuống */
+        .falling-star {
+            position: absolute;
+            top: -50px;
+            width: 15px;
+            height: 15px;
+            background-color: yellow;
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            0% {
+                top: -50px;
+                opacity: 1;
+            }
+            100% {
+                top: 100vh;
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="heart" onclick="showMessage()"></div>
+    <!-- Mũi tên chỉ lên trái tim -->
+    <div class="arrow">↑</div>
+    <!-- Dòng chữ "Click vào đây" dưới mũi tên -->
+    <div class="click-text">Nhấn vào trái tim ii</div>
+    <!-- Thêm đoạn chữ chúc mừng -->
+    <div class="text">Chúc các bạn nữ 10C01 ngày 20/10 vui vẻ</div>
+    
+    <!-- Ngôi sao rơi -->
+    <script>
+        function createFallingStar() {
+            const star = document.createElement('div');
+            star.classList.add('falling-star');
+            star.style.left = Math.random() * window.innerWidth + 'px';
+            star.style.animationDuration = Math.random() * 3 + 2 + 's';
+            document.body.appendChild(star);
+            
+            // Xóa ngôi sao sau khi rơi
+            setTimeout(() => {
+                star.remove();
+            }, 5000);
+        }
+
+        // Tạo ngôi sao rơi liên tục
+        setInterval(createFallingStar, 300);
+
+        function showMessage() {
+            alert("Chúc các bạn nữ lớp 10C01 ngày càng xinh đẹp, học giỏi và luôn vui vẻ, hạnh phúc !");
+        }
+    </script>
+</body>
+</html>
